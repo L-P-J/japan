@@ -1,14 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { day1Itinerary } from "../itineraryDetails/day1";
-import { day2Itinerary } from "../itineraryDetails/day2";
-import { day3Itinerary } from "../itineraryDetails/day3";
-import { day4Itinerary } from "../itineraryDetails/day4";
-import { day5Itinerary } from "../itineraryDetails/day5";
-import { day6Itinerary } from "../itineraryDetails/day6";
-import { DailyItineraryDetail, transportationType } from "../itineraryDetails/types";
-import ItineraryDetailDialog from "../components/ItineraryDetailDialog"; // 稍後會建立這個元件
+import { useRouter } from 'next/navigation';
+
 
 // Import 輪播圖片
 import autumnLeavesImg from '../picture/autumn-leaves-hunting-2440083_640.jpg';
@@ -38,15 +32,6 @@ type ItineraryItem = {
   day: string;
 };
 
-// 將行程詳細資料按天儲存
-const dailyItineraries: { [key: string]: (DailyItineraryDetail | transportationType)[] } = {
-  "1": day1Itinerary,
-  "2": day2Itinerary,
-  "3": day3Itinerary,
-  "4": day4Itinerary,
-  "5": day5Itinerary,
-  "6": day6Itinerary,
-};
 
 const itinerary: ItineraryItem[] = [
   { title: "Arrival in Kyoto", subtitle: "6/19 -Day 1", day: "1" },
@@ -88,9 +73,8 @@ const Header: React.FC = () => (
 );
 
 const JapanTravelPage: React.FC = () => {
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -103,21 +87,12 @@ const JapanTravelPage: React.FC = () => {
   }, []);
 
   const handleItemClick = (day: string) => {
-    setSelectedDay(day);
-    setIsDialogOpen(true);
+    router.push(`/${day}`);
   };
 
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
-    setSelectedDay(null);
-  };
 
   return (
     <div className="relative min-h-screen flex flex-col bg-slate-50 overflow-x-hidden font-sans">
-      {/* 半透明遮罩層 */}
-      {isDialogOpen && (
-        <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
-      )}
       <div className="flex flex-col grow h-full">
         <Header />
         <main className="px-4 md:px-40 flex flex-1 justify-center py-5">
@@ -165,17 +140,9 @@ const JapanTravelPage: React.FC = () => {
             </div>
           </div>
         </main>
-        {/* Dialog 元件 */}
-        {isDialogOpen && selectedDay && (
-          <ItineraryDetailDialog
-            day={selectedDay}
-            itineraryDetails={dailyItineraries[selectedDay] || []}
-            onClose={handleCloseDialog}
-          />
-        )}
       </div>
       <footer className="bg-white py-4 text-center text-black text-sm font-medium border-t border-[#e7eef3]">
-        cc becky
+        © becky
       </footer>
     </div>
   );

@@ -1,51 +1,38 @@
 import { DailyItineraryDetail, transportationType } from "./types";
 
 export const day2Itinerary: (DailyItineraryDetail | transportationType)[] = [
-    {
-        time: "06:30",
-        type: "Flight",
-        from: "桃園國際機場-關西國際機場",
-        duration: "3hr 20min", // Assuming flight duration
-        notes: "華航櫃台報到",
+
+      {        
+        time: "09:30",
+        location: "清水寺",
+        notes: "1. 搭乘計程車",
+        category: "sightseeing",
       },
-      {
-        type: "Arrival",
-        location: "關西國際機場",
-        notes: "1. 抵達日本，通過入境檢查\n 2.領取行李, 購買ICOCA卡",
-        category: "default",
+      {        
+        location: "八板神社",
+        notes: "1. 一路走下去",
+        category: "sightseeing",
       },
-      {
-        type: "Train",
-        from: "關西機場-京都車站",
-        duration: "1hr 30min",
-        notes: "搭乘HARUKA特急列車",
+      {        
+        location: "錦天滿宮",
+        notes: "1. 一路走下去",
+        category: "sightseeing",
       },
-        {
-            time: "16:00",
-            location: "京都住宿地點",
-            notes: "1. 相鐵FRESA INN 京都清水五條(計程車前往)",
-            category: "default",
-        },
-        {
-            type: "Transportation",
-            from: "清水五條-伏見稻禾",
-            duration: "25min",
-          },
-        {
-            time: "17:00",
-            location: "伏見稻禾田大社",
-            notes: "1. 預計停留1-2hr",
-            category: "sightseeing",
-        },
-        {
-          type: "Transportation",
-          from: "伏見稻禾-京都車站",
-          duration: "25min",
-        },
-        {
-        time: "????",
-        location: "吃飯飯",
-        notes: "吃飯飯飯",
-        category:"eating"
-        },
+     {         
+        location: "二三年板",
+        notes: "1. 一路走下去",
+        category: "sightseeing",
+      },
+      {        
+        location: "錦市場",
+        notes: "1. 一路走下去 2. 逛逛吃吃",
+        category: "sightseeing",
+      },
+            {        
+        location: "京都河原町",
+        notes: "1. 一路走下去 2. 逛 GU 有打折",
+        category: "sightseeing",
+      },
+
+     
 ];
