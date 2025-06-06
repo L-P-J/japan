@@ -1,11 +1,24 @@
 "use client";
 
 import React from "react";
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { DailyItineraryDetail, transportationType, isTransportation } from "../../itineraryDetails/types";
 
 // Header元件 (從 src/app/page.tsx 複製)
-const Header: React.FC = () => (
+const Header: React.FC = () => {
+  const router = useRouter();
+
+  const handleNavigation = (menu: string) => {
+    if (menu === "Home") {
+      router.push("/");
+    } 
+    if (menu === "About Us") {
+      router.push("/about");
+    } 
+
+  };
+
+  return (
   <header className="flex items-center justify-between border-b border-[#e7eef3] px-10 py-3 bg-white">
     <div className="flex items-center gap-4 text-[#0e151b]">
       <div className="size-4">
@@ -18,9 +31,13 @@ const Header: React.FC = () => (
     <div className="flex flex-1 justify-end gap-8">
       <div className="flex items-center gap-9">
         {["Home", "History", "TotalCosts", "booking","About Us", ].map((menu) => (
-          <a key={menu} className="text-sm font-medium text-black" href={menu === "Home" ? "/" : "#"}>
+          <div
+            key={menu}
+            className="text-sm font-medium text-black cursor-pointer"
+            onClick={() => handleNavigation(menu)}
+          >
             {menu}
-          </a>
+          </div>
         ))}
       </div>
       <div
@@ -33,7 +50,7 @@ const Header: React.FC = () => (
     </div>
   </header>
 );
-
+};
 
 // 導入所有行程細節資料
 import { day1Itinerary } from "@/itineraryDetails/day1";

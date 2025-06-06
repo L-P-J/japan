@@ -11,14 +11,18 @@ export const day5Itinerary: (DailyItineraryDetail | transportationType)[] = [
         category: "transportation",
       },        
       {
-        time: "????",
-        location: "吃飯飯",
-        notes: "吃飯飯飯",
+        location: "環球影城",
+        notes: "1. 哈利波特牧羊人派 2.侏儸紀雞腿 3.小小兵包子 4.奶油啤酒",
         category:"eating"
         },
     {
         location: "環球攻略",
         imageSrc: USJ.src,
         category: "default",
+    },
+    {
+        location: "吃吃~吃晚餐",
+        notes: "1. 一蘭拉麵 2.大阪燒 3.松屋 4.超市",
+        category:"eating"
     },
 ];

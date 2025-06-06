@@ -51,9 +51,8 @@ export const day1Itinerary: (DailyItineraryDetail | transportationType)[] = [
           category: "transportation",
         },
         {
-        time: "????",
-        location: "吃飯飯",
-        notes: "吃飯飯飯",
+        location: "京都車站",
+        notes: "1. 本家 第一旭 本店 2. 中村藤吉本店 京都站店",
         category:"eating"
         },
 ];
