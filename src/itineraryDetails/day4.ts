@@ -1,54 +1,72 @@
 import { DailyItineraryDetail, transportationType } from "./types";
 
 export const day4Itinerary: (DailyItineraryDetail | transportationType)[] = [
-    {
-        time: "06:30",
-        type: "Flight",
-        from: "桃園國際機場-關西國際機場",
-        duration: "3hr 20min", // Assuming flight duration
-        notes: "華航櫃台報到",
+      {
+        time: "08:00",
+        location: "黑門市場",
+        notes: "1. 走走看看\n 2. 預計停留1hr",
+        category: "sightseeing",
+      },
+      {
+        type: "train",
+        from: "黑門市場",
+        to: '大阪城公園',
+        duration: "30min",
         category: "transportation",
       },
       {
-        location: "關西國際機場",
-        notes: "1. 抵達日本，通過入境檢查\n 2.領取行李, 購買ICOCA卡",
-        category: "default",
+        time: "10:00",
+        location: "大阪城公園",
+        notes: "1. 可以使用大阪周遊卷 2. 進入大阪城天守閣 ",
+        category: "sightseeing",
       },
       {
-        type: "Train",
-        from: "關西機場-京都車站",
-        duration: "1hr 30min",
-        notes: "搭乘HARUKA特急列車",
+        type: "train",
+        from: "大阪城公園",
+        to: "心齋橋",
+        duration: "40min",
         category: "transportation",
       },
-        {
-            time: "16:00",
-            location: "京都住宿地點",
-            notes: "1. 相鐵FRESA INN 京都清水五條(計程車前往)",
-            category: "default",
-        },
-        {
-            type: "Transportation",
-            from: "清水五條-伏見稻禾",
-            duration: "25min",
-            category: "transportation",
-          },
-        {
-            time: "17:00",
-            location: "伏見稻禾田大社",
-            notes: "1. 預計停留1-2hr",
-            category: "sightseeing",
-        },
-        {
-          type: "Transportation",
-          from: "伏見稻禾-京都車站",
-          duration: "25min",
-          category: "transportation",
-        },
-        {
-        time: "????",
-        location: "吃飯飯",
-        notes: "吃飯飯飯",
-        category:"eating"
-        },
+      {
+        location: "心齋橋筋商店街",
+        notes: "1. 一路走下去 2.買爆爆~",
+        category: "sightseeing",
+      },
+      {
+        location: "心齋橋",
+        notes: "1.中午想吃大阪燒 2.MooKEN 3.可麗餅 4.章魚燒 5.可頌",
+        category: "eating",
+      },
+      {
+        location: "道頓堀",
+        notes: "1. 一路走下去 2.買爆爆~",
+        category: "sightseeing",
+      },
+      {
+        location: "美國街",
+        notes: "1. 一路走下去 2.買爆爆~",
+        category: "sightseeing",
+      },      
+      {
+        location: "難波八阪神社",
+        notes: "1. 營業時間 17:00",
+        category: "sightseeing",
+      },      
+      {
+        location: "通天閣",
+        notes: "1. 營業時間 20:00 2. 可以使用周遊卷上去玩溜滑梯跟觀景台",
+        category: "sightseeing",
+      },
+      {
+        location: "新世界",
+        notes: "1. 通天閣雞蛋糕 2.炸串(越源)",
+        category: "eating",
+      },
+      {
+        location: "後續回飯店",
+        notes: "1. 超市食物 ",
+        category: "eating",
+      },
+
+
 ];
