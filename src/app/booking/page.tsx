@@ -8,7 +8,7 @@ import BookingDialog from "@/components/BookingDialog";
 
 const BookingPage: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [bookings, setBookings] = useState<{ date: string; location: string; type: string }[]>([]);
+  const [bookings, setBookings] = useState<{ date: string; time: string; location: string; type: string }[]>([]);
 
   // 從 Local Storage 載入預定資訊
   useEffect(() => {
@@ -31,7 +31,7 @@ const BookingPage: React.FC = () => {
     setIsDialogOpen(false);
   };
 
-  const handleSaveBooking = (bookingDetails: { date: string; location: string; type: string }) => {
+  const handleSaveBooking = (bookingDetails: { date: string; time: string; location: string; type: string }) => {
     setBookings([...bookings, bookingDetails]);
     console.log("Saved booking:", bookingDetails);
   };
@@ -53,19 +53,28 @@ const BookingPage: React.FC = () => {
           {/* 顯示交通預定列表 */}
           {bookings.filter(b => b.type === '交通').length > 0 && (
             <ul className="mt-4">
-              {bookings.filter(b => b.type === '交通').map((booking, index) => (
-                <li key={`交通-${index}`} className="bg-white p-4 rounded-lg shadow-md mb-2 text-black flex justify-between items-center">
-                  <div>
-                    <strong>日期:</strong> {booking.date}, <strong>地點:</strong> {booking.location}
-                  </div>
-                  <button
-                    onClick={() => handleDeleteBooking(bookings.indexOf(booking))}
-                    className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
-                  >
-                    刪除
-                  </button>
-                </li>
-              ))}
+              {bookings
+                .filter(b => b.type === '交通')
+                .sort((a, b) => {
+                  const dateComparison = a.date.localeCompare(b.date);
+                  if (dateComparison !== 0) {
+                    return dateComparison;
+                  }
+                  return a.time.localeCompare(b.time);
+                })
+                .map((booking, index) => (
+                  <li key={`交通-${index}`} className="bg-white p-4 rounded-lg shadow-md mb-2 text-black flex justify-between items-center">
+                    <div>
+                      <strong>日期:</strong> {booking.date}, <strong>時間:</strong> {booking.time}, <strong>地點:</strong> {booking.location}
+                    </div>
+                    <button
+                      onClick={() => handleDeleteBooking(bookings.indexOf(booking))}
+                      className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
+                    >
+                      刪除
+                    </button>
+                  </li>
+                ))}
             </ul>
           )}
         </section>
@@ -76,19 +85,28 @@ const BookingPage: React.FC = () => {
           {/* 顯示住宿預定列表 */}
           {bookings.filter(b => b.type === '住宿').length > 0 && (
             <ul className="mt-4">
-              {bookings.filter(b => b.type === '住宿').map((booking, index) => (
-                <li key={`住宿-${index}`} className="bg-white p-4 rounded-lg shadow-md mb-2 text-black flex justify-between items-center">
-                  <div>
-                    <strong>日期:</strong> {booking.date}, <strong>地點:</strong> {booking.location}
-                  </div>
-                  <button
-                    onClick={() => handleDeleteBooking(bookings.indexOf(booking))}
-                    className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
-                  >
-                    刪除
-                  </button>
-                </li>
-              ))}
+              {bookings
+                .filter(b => b.type === '住宿')
+                .sort((a, b) => {
+                  const dateComparison = a.date.localeCompare(b.date);
+                  if (dateComparison !== 0) {
+                    return dateComparison;
+                  }
+                  return a.time.localeCompare(b.time);
+                })
+                .map((booking, index) => (
+                  <li key={`住宿-${index}`} className="bg-white p-4 rounded-lg shadow-md mb-2 text-black flex justify-between items-center">
+                    <div>
+                      <strong>日期:</strong> {booking.date}, <strong>時間:</strong> {booking.time}, <strong>地點:</strong> {booking.location}
+                    </div>
+                    <button
+                      onClick={() => handleDeleteBooking(bookings.indexOf(booking))}
+                      className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
+                    >
+                      刪除
+                    </button>
+                  </li>
+                ))}
             </ul>
           )}
         </section>
@@ -100,19 +118,28 @@ const BookingPage: React.FC = () => {
           {/* 顯示旅遊預定列表 */}
           {bookings.filter(b => b.type === '旅遊').length > 0 && (
             <ul className="mt-4">
-              {bookings.filter(b => b.type === '旅遊').map((booking, index) => (
-                <li key={`旅遊-${index}`} className="bg-white p-4 rounded-lg shadow-md mb-2 text-black flex justify-between items-center">
-                  <div>
-                    <strong>日期:</strong> {booking.date}, <strong>地點:</strong> {booking.location}
-                  </div>
-                  <button
-                    onClick={() => handleDeleteBooking(bookings.indexOf(booking))}
-                    className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
-                  >
-                    刪除
-                  </button>
-                </li>
-              ))}
+              {bookings
+                .filter(b => b.type === '旅遊')
+                .sort((a, b) => {
+                  const dateComparison = a.date.localeCompare(b.date);
+                  if (dateComparison !== 0) {
+                    return dateComparison;
+                  }
+                  return a.time.localeCompare(b.time);
+                })
+                .map((booking, index) => (
+                  <li key={`旅遊-${index}`} className="bg-white p-4 rounded-lg shadow-md mb-2 text-black flex justify-between items-center">
+                    <div>
+                      <strong>日期:</strong> {booking.date}, <strong>時間:</strong> {booking.time}, <strong>地點:</strong> {booking.location}
+                    </div>
+                    <button
+                      onClick={() => handleDeleteBooking(bookings.indexOf(booking))}
+                      className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
+                    >
+                      刪除
+                    </button>
+                  </li>
+                ))}
             </ul>
           )}
         </section>

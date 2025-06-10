@@ -5,11 +5,12 @@ import React, { useState } from 'react';
 interface BookingDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (bookingDetails: { date: string; location: string; type: string }) => void;
+  onSave: (bookingDetails: { date: string; time: string; location: string; type: string }) => void;
 }
 
 const BookingDialog: React.FC<BookingDialogProps> = ({ isOpen, onClose, onSave }) => {
   const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('住宿'); // Default type
 
@@ -18,8 +19,9 @@ const BookingDialog: React.FC<BookingDialogProps> = ({ isOpen, onClose, onSave }
   }
 
   const handleSave = () => {
-    onSave({ date, location, type });
+    onSave({ date, time, location, type });
     setDate('');
+    setTime('');
     setLocation('');
     setType('住宿');
     onClose();
@@ -38,6 +40,18 @@ const BookingDialog: React.FC<BookingDialogProps> = ({ isOpen, onClose, onSave }
             id="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="time">
+            時間
+          </label>
+          <input
+            type="time"
+            id="time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
