@@ -17,6 +17,12 @@ const Header: React.FC = () => {
     if (menu === "booking") {
       router.push("/booking");
     }
+    if (menu === "History") {
+      router.push("/history");
+    }
+    if (menu === "TotalCosts") {
+      router.push("/total-cost");
+    }
     setIsMenuOpen(false); // 導航後關閉菜單
   };
 
