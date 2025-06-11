@@ -1,30 +1,44 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface BookingDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (bookingDetails: { date: string; time: string; location: string; type: string }) => void;
+  onSave: (bookingDetails: { date: string; time: string; location: string; type: string; imageUrl?: string }) => void;
+  bookingDetails?: { date: string; time: string; location: string; type: string; imageUrl?: string } | null;
 }
 
-const BookingDialog: React.FC<BookingDialogProps> = ({ isOpen, onClose, onSave }) => {
+const BookingDialog: React.FC<BookingDialogProps> = ({ isOpen, onClose, onSave, bookingDetails }) => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('住宿'); // Default type
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+    if (bookingDetails) {
+      setDate(bookingDetails.date);
+      setTime(bookingDetails.time);
+      setLocation(bookingDetails.location);
+      setType(bookingDetails.type);
+      setImageUrl(bookingDetails.imageUrl || '');
+    } else {
+      setDate('');
+      setTime('');
+      setLocation('');
+      setType('住宿');
+      setImageUrl('');
+    }
+  }, [bookingDetails]);
 
   if (!isOpen) {
     return null;
   }
 
   const handleSave = () => {
-    onSave({ date, time, location, type });
-    setDate('');
-    setTime('');
-    setLocation('');
-    setType('住宿');
-    onClose();
+    onSave({ date, time, location, type, imageUrl });
+    onClose(); // Close dialog after saving
   };
 
   return (
@@ -82,6 +96,34 @@ const BookingDialog: React.FC<BookingDialogProps> = ({ isOpen, onClose, onSave }
             <option value="交通">交通</option>
           </select>
         </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imageFile">
+            圖片 (選填)
+          </label>
+          <input
+            type="file"
+            id="imageFile"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  setImageUrl(reader.result as string);
+                };
+                reader.readAsDataURL(file);
+              } else {
+                setImageUrl('');
+              }
+            }}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+           {imageUrl && (
+            <div className="mt-2">
+              <img src={imageUrl} alt="Selected image preview" className="max-h-32 object-cover rounded" />
+            </div>
+          )}
+        </div>
         <div className="flex justify-end">
           <button
             onClick={onClose}
@@ -93,7 +135,7 @@ const BookingDialog: React.FC<BookingDialogProps> = ({ isOpen, onClose, onSave }
             onClick={handleSave}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            加入
+            {bookingDetails ? '儲存' : '加入'}
           </button>
         </div>
       </div>
