@@ -1,17 +1,30 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface CostDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (costDetails: { itemName: string; totalAmount: number; numberOfPeople: number }) => void;
+  costDetails?: { itemName: string; totalAmount: number; numberOfPeople: number } | null;
 }
 
-const CostDialog: React.FC<CostDialogProps> = ({ isOpen, onClose, onSave }) => {
+const CostDialog: React.FC<CostDialogProps> = ({ isOpen, onClose, onSave, costDetails }) => {
   const [itemName, setItemName] = useState('');
   const [totalAmount, setTotalAmount] = useState(0);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
+
+  useEffect(() => {
+    if (costDetails) {
+      setItemName(costDetails.itemName);
+      setTotalAmount(costDetails.totalAmount);
+      setNumberOfPeople(costDetails.numberOfPeople);
+    } else {
+      setItemName('');
+      setTotalAmount(0);
+      setNumberOfPeople(1);
+    }
+  }, [costDetails]);
 
   if (!isOpen) {
     return null;
@@ -20,10 +33,7 @@ const CostDialog: React.FC<CostDialogProps> = ({ isOpen, onClose, onSave }) => {
   const handleSave = () => {
     if (itemName && totalAmount > 0 && numberOfPeople > 0) {
       onSave({ itemName, totalAmount, numberOfPeople });
-      setItemName('');
-      setTotalAmount(0);
-      setNumberOfPeople(1);
-      onClose();
+      onClose(); // Close dialog after saving
     } else {
       // Optionally show an error message to the user
       alert('請填寫所有欄位並確保金額和人數大於零。');
@@ -81,7 +91,7 @@ const CostDialog: React.FC<CostDialogProps> = ({ isOpen, onClose, onSave }) => {
             onClick={handleSave}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            加入
+            {costDetails ? '儲存' : '加入'}
           </button>
         </div>
       </div>
