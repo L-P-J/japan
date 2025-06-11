@@ -10,6 +10,8 @@ const TotalCostPage: React.FC = () => {
   const [costs, setCosts] = useState<{ itemName: string; totalAmount: number; numberOfPeople: number }[]>([]);
   const [totalCost, setTotalCost] = useState(0);
   const [isCostDialogOpen, setIsCostDialogOpen] = useState(false);
+  const [editingCost, setEditingCost] = useState<{ itemName: string; totalAmount: number; numberOfPeople: number } | null>(null);
+  const [editingCostIndex, setEditingCostIndex] = useState<number | null>(null);
 
 
   // 從 Local Storage 載入預定資訊
@@ -51,15 +53,34 @@ const TotalCostPage: React.FC = () => {
 
   const handleCloseCostDialog = () => {
     setIsCostDialogOpen(false);
+    setEditingCost(null);
+    setEditingCostIndex(null);
   };
 
   const handleSaveCost = (costDetails: { itemName: string; totalAmount: number; numberOfPeople: number }) => {
-    setCosts([...costs, costDetails]);
-    console.log("Saved cost:", costDetails);
+    if (editingCostIndex !== null) {
+      // Editing existing cost
+      const updatedCosts = [...costs];
+      updatedCosts[editingCostIndex] = costDetails;
+      setCosts(updatedCosts);
+      setEditingCost(null);
+      setEditingCostIndex(null);
+      console.log("Updated cost:", costDetails);
+    } else {
+      // Adding new cost
+      setCosts([...costs, costDetails]);
+      console.log("Saved new cost:", costDetails);
+    }
   };
 
   const handleDeleteCost = (indexToDelete: number) => {
     setCosts(costs.filter((_, index) => index !== indexToDelete));
+  };
+
+  const handleEditCost = (costItem: { itemName: string; totalAmount: number; numberOfPeople: number }, index: number) => {
+    setEditingCost(costItem);
+    setEditingCostIndex(index);
+    setIsCostDialogOpen(true);
   };
 
 
@@ -77,12 +98,20 @@ const TotalCostPage: React.FC = () => {
                 <div>
                   項目: {costItem.itemName}, 金額: ${costItem.totalAmount}, 人數: {costItem.numberOfPeople}
                 </div>
-                <button
-                  onClick={() => handleDeleteCost(index)}
-                  className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
-                >
-                  刪除
-                </button>
+                <div>
+                  <button
+                    onClick={() => handleEditCost(costItem, index)}
+                    className="bg-blue-300 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline mr-2"
+                  >
+                    編輯
+                  </button>
+                  <button
+                    onClick={() => handleDeleteCost(index)}
+                    className="bg-red-300 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs focus:outline-none focus:shadow-outline"
+                  >
+                    刪除
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
@@ -105,6 +134,7 @@ const TotalCostPage: React.FC = () => {
         isOpen={isCostDialogOpen}
         onClose={handleCloseCostDialog}
         onSave={handleSaveCost}
+        costDetails={editingCost}
       />
     </div>
   );
