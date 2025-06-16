@@ -6,7 +6,7 @@ import nishiki from "@/picture/Shinsaibashi.jpg";
 import osakaCastle from "@/picture/castle.jpg";
 import Shinsaibashi from "@/picture/Shinsaibashi.jpg";
 import dotonboriShinsaibashi from "@/picture/Dotonbori.jpg";
-import newWorld from "@/picture/newworld.jpg";
+import newWorld from "@/picture/newWorld.jpg";
 
 
 export interface Attraction {
