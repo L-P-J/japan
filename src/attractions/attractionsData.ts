@@ -2,10 +2,11 @@ import tample from "@/picture/tample.jpg";
 import tample2 from "@/picture/tample2.jpg"; 
 import tample3 from "@/picture/tample3.jpg"; 
 import tample4 from "@/picture/tample4.jpg"; 
-import nishiki from "@/picture/IMG_6330.jpeg";
+import nishiki from "@/picture/Shinsaibashi.jpg";
 import osakaCastle from "@/picture/castle.jpg";
-import shinsekai from "@/picture/Shinsaibashi.jpg";
+import Shinsaibashi from "@/picture/Shinsaibashi.jpg";
 import dotonboriShinsaibashi from "@/picture/Dotonbori.jpg";
+import newWorld from "@/picture/newworld.jpg";
 
 
 export interface Attraction {
@@ -42,7 +43,7 @@ export const attractions: Attraction[] = [
   },
   {
     name: "新世界 (Shinsekai)",
-    imageUrl: shinsekai.src, // Example image path
+    imageUrl: newWorld.src, // Example image path
     description: "新世界是位於日本大阪市浪速區的一個老城區，以通天閣和串炸聞名。這裡充滿懷舊氛圍，是體驗大阪庶民文化的好地方。",
   },
   {
@@ -52,7 +53,7 @@ export const attractions: Attraction[] = [
   },
   {
     name: "心齋橋 (Shinsaibashi)",
-    imageUrl: dotonboriShinsaibashi.src, // Example image path
+    imageUrl: Shinsaibashi.src, // Example image path
     description: "心齋橋是大阪的主要購物區，擁有各種百貨公司、品牌專賣店和時尚精品店，是購物愛好者的天堂。",
   },
   {
