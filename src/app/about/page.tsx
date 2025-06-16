@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import corgiImg from "@/picture/japan-5081058_640.jpg";
+import corgiImg from "@/picture/IMG_0013.jpeg"; // 導入製作人頭貼圖片
 import Header from '../../components/Header'; // 導入 Header 組件
 import Footer from "@/components/Footer";
 
@@ -19,8 +19,8 @@ const AboutUsPage: React.FC = () => {
             <Image
               src={corgiImg}
               alt="製作人頭貼"
-              width={100}
-              height={100}
+              width={250}
+              height={250}
               className="rounded-full mx-auto"
             />
           </div>
