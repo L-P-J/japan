@@ -1,3 +1,17 @@
+## Project Overview
+
+This app is a personal travel planner for a six-day Kyoto and Osaka trip. It combines curated daily itineraries with utility tools that help keep the journey organized and on budget.
+
+### Key Features
+- Home page carousel with quick links to each daily schedule.
+- Per-day detail pages that list activities, transportation, and notes.
+- History page highlighting notable attractions with images and descriptions.
+- Booking dashboard for tracking transport, lodging, and activity reservations with local storage persistence.
+- Cost tracker that records shared expenses and calculates per-person totals.
+- About and footer sections for trip owner information.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
